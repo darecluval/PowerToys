@@ -38,7 +38,8 @@ FlagCheckboxMap g_flagCheckboxMap[] = {
     { ExtensionOnly, IDC_CHECK_EXTENSIONONLY },
     { Uppercase, IDC_TRANSFORM_UPPERCASE },
     { Lowercase, IDC_TRANSFORM_LOWERCASE },
-    { Titlecase, IDC_TRANSFORM_TITLECASE }
+    { Titlecase, IDC_TRANSFORM_TITLECASE },
+    { CamelCase, IDC_TRANSFORM_CAMELCASE }
 };
 
 struct RepositionMap
@@ -674,6 +675,7 @@ void CPowerRenameUI::_InitDlgText()
     UpdateDlgControl(m_hwnd, IDC_CHECK_ENUMITEMS, IDS_ENUMERATE_ITEMS);
     UpdateDlgControl(m_hwnd, IDC_CHECK_NAMEONLY, IDS_ITEM_NAME_ONLY);
     UpdateDlgControl(m_hwnd, IDC_CHECK_EXTENSIONONLY, IDS_ITEM_EXTENSION_ONLY);
+    UpdateDlgControl(m_hwnd, IDC_TRANSFROM_CAMELCASE, IDS_MAKE_CAMELCASE);
     UpdateDlgControl(m_hwnd, IDC_TRANSFORM_TITLECASE, IDS_MAKE_TITLECASE);
     UpdateDlgControl(m_hwnd, ID_RENAME, IDS_RENAME_BUTTON);
     UpdateDlgControl(m_hwnd, ID_ABOUT, IDS_HELP_BUTTON);
@@ -731,6 +733,7 @@ void CPowerRenameUI::_OnCommand(_In_ WPARAM wParam, _In_ LPARAM lParam)
         }
         break;
     }
+    case IDC_TRANSFORM_CAMELCASE: // TODO
 }
 
 BOOL CPowerRenameUI::_OnNotify(_In_ WPARAM wParam, _In_ LPARAM lParam)
@@ -948,6 +951,7 @@ void CPowerRenameUI::_ValidateFlagCheckbox(_In_ DWORD checkBoxId)
         {
             Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_LOWERCASE), FALSE);
             Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_TITLECASE), FALSE);
+            Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_CAMELCASE), FALSE);
         }
     }
     else if (checkBoxId == IDC_TRANSFORM_LOWERCASE)
@@ -956,6 +960,7 @@ void CPowerRenameUI::_ValidateFlagCheckbox(_In_ DWORD checkBoxId)
         {
             Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_UPPERCASE), FALSE);
             Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_TITLECASE), FALSE);
+            Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_CAMELCASE), FALSE);
         }
     }
     else if (checkBoxId == IDC_TRANSFORM_TITLECASE)
@@ -964,6 +969,15 @@ void CPowerRenameUI::_ValidateFlagCheckbox(_In_ DWORD checkBoxId)
         {
             Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_UPPERCASE), FALSE);
             Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_LOWERCASE), FALSE);
+            Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_CAMELCASE), FALSE);
+        }
+    }
+    else if (checkBoxId == IDC_TRANSFORM_CAMELCASE) {
+        if (Button_GetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_CAMELCASE) == BST_CHECKED)
+        {
+            Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_UPPERCASE), FALSE);
+            Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_LOWERCASE), FALSE);
+            Button_SetCheck(GetDlgItem(m_hwnd, IDC_TRANSFORM_TITLECASE), FALSE);
         }
     }
     else if (checkBoxId == IDC_CHECK_NAMEONLY)
