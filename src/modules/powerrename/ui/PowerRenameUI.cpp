@@ -733,7 +733,7 @@ void CPowerRenameUI::_OnCommand(_In_ WPARAM wParam, _In_ LPARAM lParam)
         }
         break;
     }
-    case IDC_TRANSFORM_CAMELCASE: // TODO
+    case IDC_TRANSFORM_CAMELCASE: 
 }
 
 BOOL CPowerRenameUI::_OnNotify(_In_ WPARAM wParam, _In_ LPARAM lParam)
